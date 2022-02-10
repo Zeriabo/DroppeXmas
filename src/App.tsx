@@ -68,6 +68,24 @@ Object.values(cards.reducer).forEach(val =>{
   }
 });
 console.log(declinedCarts)
+//window.location.href = "/results"
+console.log(card1.date,card1.products)
+fetch('https://fakestoreapi.com/carts',{
+            method:"POST",
+            body:JSON.stringify(
+                {
+                  body:JSON.stringify(
+                    {
+                        userId:card1.userId,
+                        date:card1.date,
+                        products:card1.products
+                    }
+                )
+                }
+            )
+        })
+            .then(res=>res.json())
+            .then(json=>console.log(json))
 }
 
   return (
@@ -82,23 +100,53 @@ console.log(declinedCarts)
           <div>
          <p>Cart 1 date:{new Date(card1.date).toLocaleDateString()}</p>
           </div>
-        <div> <Cart childId={0} date={new Date(card1.date).toLocaleDateString()} cartItems={card1.products} child={0}  /></div>
+        <div> <Cart childId={0} date={new Date(card1.date).toLocaleDateString()} cartItems={card1.products} child={0} increaseAmount={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } addToCart={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } decreaseAmount={function (id: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } }  /></div>
         <div>
          <p>Cart 2 date:{new Date(card2.date).toLocaleDateString()}</p>
           </div> 
-        <div> <Cart childId={1} date={new Date(card2.date).toLocaleDateString()} cartItems={card2.products} child={1}  /></div> 
+        <div> <Cart childId={1} date={new Date(card2.date).toLocaleDateString()} cartItems={card2.products} child={1} increaseAmount={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } addToCart={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } decreaseAmount={function (id: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } }  /></div> 
         <div>
          <p>Cart 3 date:{new Date(card3.date).toLocaleDateString()}</p>
           </div>
-        <div> <Cart childId={2} date={new Date(card3.date).toLocaleDateString()} cartItems={card3.products} child={2}  /></div>
+        <div> <Cart childId={2} date={new Date(card3.date).toLocaleDateString()} cartItems={card3.products} child={2} increaseAmount={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } addToCart={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } decreaseAmount={function (id: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } }  /></div>
         <div>
          <p>Cart 4 date:{new Date(card4.date).toLocaleDateString()}</p>
           </div> 
-        <div> <Cart childId={3} date={new Date(card4.date).toLocaleDateString()} cartItems={card4.products} child={3}  /></div> 
+        <div> <Cart childId={3} date={new Date(card4.date).toLocaleDateString()} cartItems={card4.products} child={3} increaseAmount={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } addToCart={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } decreaseAmount={function (id: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } }  /></div> 
         <div>
          <p>Cart 5 date:{new Date(card5.date).toLocaleDateString()}</p>
           </div>
-        <div> <Cart childId={4} date={new Date(card5.date).toLocaleDateString()} cartItems={card5.products} child={4}  /></div> 
+        <div> <Cart childId={4} date={new Date(card5.date).toLocaleDateString()} cartItems={card5.products} child={4} increaseAmount={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } addToCart={function (clicked: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } } decreaseAmount={function (id: CartItemDetail): void {
+          throw new Error('Function not implemented.');
+        } }  /></div> 
        <div>
 
        </div>

@@ -18,9 +18,9 @@ export const Wrapper = styled.div`
   }
 
   img {
-    max-width: 80px;
+    max-width: 400px;
     object-fit: cover;
-    margin-left: 40px;
+    margin-left: 4px;
   
   }
 `;
