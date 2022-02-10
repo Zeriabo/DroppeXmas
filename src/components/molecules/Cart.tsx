@@ -4,8 +4,8 @@ import { ButtonWrapper } from "../atoms/button";
 import CartItem from "./CartItem";
 import { CartItemDetail } from "../../App";
 import useForceUpdate from 'use-force-update';
-import {saveCard,addcard} from '../../features/Cards/cardsSlice'
-import { useAppDispatch } from "../../app/hooks";
+import {addcard} from '../../features/Cards/cardsSlice'
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 type Props = {
   childId: number,
@@ -20,13 +20,40 @@ type Props = {
 const Cart: React.FC<Props> = ({ cartItems,child }) => {
 
   const dispatch= useAppDispatch();
-
-function confirm(obj:any)
+  const card1 = useAppSelector(state=>state.reducer.card1)
+  const card2 = useAppSelector(state=>state.reducer.card2)
+  const card3 = useAppSelector(state=>state.reducer.card3)
+  const card4 = useAppSelector(state=>state.reducer.card4)
+  const card5 = useAppSelector(state=>state.reducer.card5)
+function confirm(cardnumber:number)
 {
-  console.log(obj)
-  dispatch(addcard(obj));
 
- //dispatch(saveCard(obj))
+switch(cardnumber)
+{
+  case 1:
+   
+    dispatch(addcard(card1))
+    break;
+
+    case 2:
+   
+    dispatch(addcard(card2))
+    break;
+
+    case 3:
+  
+    dispatch(addcard(card3))
+    break;
+
+    case 4:
+    dispatch(addcard(card4))
+    break;
+
+    case 5:
+    dispatch(addcard(card5))
+    break;
+}
+  //dispatch(addcard(obj));
 }
 
 
@@ -65,7 +92,7 @@ function calculateTotal(items:any)
       ))}
       <h2>Total: {calculateTotal(cartItems)} EUR</h2>
 
-      <button type="button"  onClick={() => confirm(cartItems)}>Confirm</button>
+      <button type="button"  onClick={() => confirm(cartItems[0].cart)}>Confirm</button>
     </Wrapper>
   );
 };

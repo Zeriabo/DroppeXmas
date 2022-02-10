@@ -51,9 +51,23 @@ const cards = useAppSelector(state=>state)
 
 function sendData()
 { 
- 
-  console.log(cards.reducer)
+var approvedCarts: Cart[]  =[];
+var declinedCarts: Cart[]  =[];
+const ar: Cart[]=  cards.reducer.cards
+console.log(ar)
+ar.forEach((cart)=>{
+  approvedCarts.push(cart)
+})
+console.log(approvedCarts)
 
+console.log(cards.reducer)
+Object.values(cards.reducer).forEach(val =>{
+  if(!approvedCarts.includes(val) && !Array.isArray(val))
+  {
+    declinedCarts.push(val)
+  }
+});
+console.log(declinedCarts)
 }
 
   return (
