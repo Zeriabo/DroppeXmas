@@ -9,7 +9,7 @@ import { IncrementAmountTwo ,decreaseAmountTwo,ApproveTwo,DeclineTwo, calcTotalC
 import { addProductToCardFive, removeProductFromCardFive,Declinecard5,ApproveCard5,IncrementAmountFive,decreaseAmountFive,calcCard5Total,calcTotalCard5Decrement } from "../../features/Cards/cardFiveSlice";
 import  { addProductToCardFour, removeProductFromCardFour,IncrementAmountFour,calcCard4Total,calcTotalCard4Decrement,decreaseAmountFour,Declinecard4 ,ApproveCard4} from "../../features/Cards/cardFourSlice";
 import { addProductToCardThree, IncrementAmountThree,calcTotalCard3,calcTotalCard3Decrement ,ApproveThree,DeclineThree,decrementAmountThree}  from '../../features/Cards/cardThreeSlice';
-import { DECREASE_AMOUNT, ICREMENT_ITEM } from "../../features/Cards/types";
+
 //here
 type Props = {
   item: CartItemDetail;

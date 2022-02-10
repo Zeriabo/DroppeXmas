@@ -28,7 +28,7 @@ var productsUnique : CartItemDetail[]=Object.values(products.reduce((acc,cur)=>O
 
 
 
-var resultToReturn = productsUnique.filter((element, index) => {
+ productsUnique.filter((element, index) => {
     var count: number=0;
   products.forEach((p)=>{
         if(p.id==element.id)
@@ -36,9 +36,7 @@ var resultToReturn = productsUnique.filter((element, index) => {
             count++;
         }
         
-    }
-   
-    )
+    })
  
     if(count>1)
     {
@@ -78,22 +76,30 @@ function adjustProducts(cartproducts: CartItemDetail[], normAmount: number, prod
    
    while(cartproducts.length<normAmount)
     {
-       var  item = products[Math.floor(Math.random()*products.length)];
-       console.log(item )
+       var pickfrom:CartItemDetail[]=[];
+       for(var i=0; i <products.length;i++)
+       {
+
+           if(!cartproducts.includes(products[i]))
+           {
+            pickfrom.push(products[i])
+           }
+       }
+       var  item = pickfrom[Math.floor(Math.random()*products.length)];
        item.amount=1;
        var cart: number;
        for(var i=0; i <cartproducts.length;i++)
        {
-           console.log(cartproducts[i])
+
            if(cartproducts[i].cart!==null)
            {
                cart=cartproducts[i].cart
            }
        }
-       console.log(cart)
+
        item.cart=cart
        item.approved=false
-     console.log(item)
+
          cartproducts.push(item)
 
     }
@@ -162,9 +168,6 @@ var total:number=0;
 
      });
   
- 
-
-
   if(found)
   {
     var  pToInsert={

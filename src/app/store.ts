@@ -8,6 +8,7 @@ import cardFiveSlice from "../features/Cards/cardFiveSlice";
 import { productsApi } from "../features/ProductsApi/productsApiSlice";
 import {cartsApi} from '../features/CardsApi/cardsApiSlice';
 import productsSlice from "../features/Products/productsSlice";
+import cardsSlice from "../features/Cards/cardsSlice";
 
 
 const reducer = combineReducers({
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   card3:cardThreeSlice,
   card4:cardFourSlice,
   card5:cardFiveSlice,
+  cards:cardsSlice,
 
   products:productsSlice
   

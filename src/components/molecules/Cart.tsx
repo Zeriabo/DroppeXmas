@@ -4,7 +4,8 @@ import { ButtonWrapper } from "../atoms/button";
 import CartItem from "./CartItem";
 import { CartItemDetail } from "../../App";
 import useForceUpdate from 'use-force-update';
-
+import {saveCard,addcard} from '../../features/Cards/cardsSlice'
+import { useAppDispatch } from "../../app/hooks";
 
 type Props = {
   childId: number,
@@ -16,13 +17,16 @@ type Props = {
   child:number;
 };
 
-
 const Cart: React.FC<Props> = ({ cartItems,child }) => {
+
+  const dispatch= useAppDispatch();
 
 function confirm(obj:any)
 {
   console.log(obj)
- 
+  dispatch(addcard(obj));
+
+ //dispatch(saveCard(obj))
 }
 
 
@@ -67,5 +71,6 @@ function calculateTotal(items:any)
 };
 
 export default Cart;
+
 
 

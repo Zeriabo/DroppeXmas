@@ -34,6 +34,8 @@ export interface CardOneState {
       __v: state.__v,};
 
       },
+   
+      
       card1Success: (state, action) => {
         state.date = action.payload.date;
         state.id=action.payload.id;

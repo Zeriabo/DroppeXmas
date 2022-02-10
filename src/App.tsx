@@ -8,10 +8,6 @@ import {addProductToCardThree} from './features/Cards/cardThreeSlice';
 import {addProductToCardFour} from './features/Cards/cardFourSlice';
 import cardFiveSlice, {addProductToCardFive} from './features/Cards/cardFiveSlice';
 import {product} from './features/ProductsApi/productsApiSlice'
-import Cart1 from './components/molecules/Cart1';
-import Cart2 from './components/molecules/Cart2';
-import Cart3 from './components/molecules/Cart3';
-import Cart4 from './components/molecules/Cart4';
 import Cart from './components/molecules/Cart';
 import { useGetCartsQuery } from './features/CardsApi/cardsApiSlice';
 import { useSelector } from 'react-redux';
@@ -19,6 +15,7 @@ import axios from 'axios'
 import { fetchCards } from './features/actions';
 import { fetchProducts } from './features/actions';
 import cardOneSlice from './features/Cards/cardOneSlice';
+import cardsSlice, { saveCard } from './features/Cards/cardsSlice';
 
 export interface Cart {
   id: number;
@@ -52,7 +49,12 @@ function App() {
 const cards = useAppSelector(state=>state)
 
 
+function sendData()
+{ 
+ 
+  console.log(cards.reducer)
 
+}
 
   return (
    
@@ -86,7 +88,9 @@ const cards = useAppSelector(state=>state)
        <div>
 
        </div>
-     
+     <div>
+     <button type="button"  onClick={() => sendData()}>Send data</button>
+     </div>
       </header>
     </div>
   )

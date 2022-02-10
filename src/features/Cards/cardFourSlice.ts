@@ -50,7 +50,6 @@ export interface CardFourState {
         state.products.pop()
       },
       IncrementAmountFour(state, action: PayloadAction<number>) {
-console.log(action.payload)
         state.products.forEach((element, index) => {
         {
             if(element.id==action.payload.id)

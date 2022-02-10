@@ -68,7 +68,7 @@ export interface CardTwoState {
 
       },
       IncrementAmountTwo(state, action: PayloadAction<number>) {
-        console.log("increment")
+  
         var id = action.payload.id;
        state.products.forEach((element, index) => {
         if(element.id === id) {
@@ -81,7 +81,7 @@ export interface CardTwoState {
       decreaseAmountTwo(state,action: PayloadAction<{}>) {
 
         var id = action.payload.id;
-       console.log()
+   
         state.products.forEach((element, index) => {
           if(element.id === id) {
             element.amount--;
