@@ -36,7 +36,7 @@ export type CartItemDetail= {
   title: string;
   amount: number;
   approved:boolean;
-  card:string;
+  cart:number;
   rating:[any,any]
   
 };

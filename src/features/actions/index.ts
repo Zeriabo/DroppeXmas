@@ -79,6 +79,21 @@ function adjustProducts(cartproducts: CartItemDetail[], normAmount: number, prod
    while(cartproducts.length<normAmount)
     {
        var  item = products[Math.floor(Math.random()*products.length)];
+       console.log(item )
+       item.amount=1;
+       var cart: number;
+       for(var i=0; i <cartproducts.length;i++)
+       {
+           console.log(cartproducts[i])
+           if(cartproducts[i].cart!==null)
+           {
+               cart=cartproducts[i].cart
+           }
+       }
+       console.log(cart)
+       item.cart=cart
+       item.approved=false
+     console.log(item)
          cartproducts.push(item)
 
     }
@@ -94,7 +109,6 @@ var ar:number[]=[];
  ar.push(card4.products.length)
  ar.push(card5.products.length)
  var max= Math.max(...ar);
-
 
  if(card2.products.length==max)
  { 
@@ -170,7 +184,7 @@ newCart.products.push(pToInsert);
   }
 
 });
-//dispatch(replaceProducts(newCart.products))
+
 
 total =calculateTotal(newCart)
 newCart.total=total;
