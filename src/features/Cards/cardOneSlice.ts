@@ -50,9 +50,10 @@ export interface CardOneState {
     },
     Approve(state,action:PayloadAction<{}>){
       var id = action.payload.id;
+    var  targetIndex = state.products.findIndex((obj => obj.id == id));
 
-    action.payload.approved=true;
-    
+      state.products[targetIndex].approved=true;
+
     },
       addProductToCardOne(state, action: PayloadAction<CartItemDetail>) {
      
@@ -79,12 +80,17 @@ export interface CardOneState {
       decreaseAmountOne(state,action: PayloadAction<{}>) {
     
         var id = action.payload.id;
-       console.log()
+      
         state.products.forEach((element, index) => {
           if(element.id === id) {
             element.amount--;
           
           }
+          if(element.amount==0)
+          {
+            element.approved=false;
+          }
+        
       });
         
    
@@ -100,7 +106,10 @@ export interface CardOneState {
   },
   
   Decline(state,action:PayloadAction<{}>){
-    action.payload.approved=false;
+    var id = action.payload.id;
+    var  targetIndex = state.products.findIndex((obj => obj.id == id));
+
+      state.products[targetIndex].approved=false;
   },
   calcTotal(state,action:PayloadAction<{}>) {    
       

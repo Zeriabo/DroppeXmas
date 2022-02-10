@@ -50,9 +50,10 @@ export interface CardTwoState {
     },
     ApproveTwo(state,action:PayloadAction<{}>){
       var id = action.payload.id;
+    var  targetIndex = state.products.findIndex((obj => obj.id == id));
 
-    action.payload.approved=true;
-    
+      state.products[targetIndex].approved=true;
+
     },
       addProductToCardTwo(state, action: PayloadAction<CartItemDetail>) {
      
@@ -78,7 +79,7 @@ export interface CardTwoState {
       
       },
       decreaseAmountTwo(state,action: PayloadAction<{}>) {
-    console.log(action)
+
         var id = action.payload.id;
        console.log()
         state.products.forEach((element, index) => {
@@ -96,9 +97,12 @@ export interface CardTwoState {
       },
   
   
-  Decline(state,action:PayloadAction<{}>){
-    action.payload.approved=false;
-  },
+      DeclineTwo(state,action:PayloadAction<{}>){
+        var id = action.payload.id;
+        var  targetIndex = state.products.findIndex((obj => obj.id == id));
+    
+          state.products[targetIndex].approved=false;
+      },
   calcTotal(state,action:PayloadAction<{}>) {    
       
        
@@ -114,5 +118,5 @@ export interface CardTwoState {
     },
   })
   
-  export const { addProductToCardTwo,replaceProducts,card2Success,calcTotal,calcTotalCard2Decrement,ApproveTwo,Decline, initiateState,removeProductFromCardTwo,IncrementAmountTwo,calcTotalCard2,decreaseAmountTwo } = cardTwoSlice.actions
+  export const { addProductToCardTwo,replaceProducts,card2Success,calcTotal,calcTotalCard2Decrement,ApproveTwo,DeclineTwo, initiateState,removeProductFromCardTwo,IncrementAmountTwo,calcTotalCard2,decreaseAmountTwo } = cardTwoSlice.actions
   export default cardTwoSlice.reducer

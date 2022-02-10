@@ -44,28 +44,19 @@ export interface CartThreeState {
            state.userId=action.payload.userId;
          
        },
-      DeclineThree(state,action:PayloadAction<{}>){
+       DeclineThree(state,action:PayloadAction<{}>){
+        var id = action.payload.id;
+        var  targetIndex = state.products.findIndex((obj => obj.id == id));
+    
+          state.products[targetIndex].approved=false;
+      },
+ApproveThree(state,action:PayloadAction<{}>){
   var id = action.payload.id;
+var  targetIndex = state.products.findIndex((obj => obj.id == id));
 
-  state.products.forEach((element, index) => {
-    if(element.id === id) {
-      element.Approve=false;
-    }
-  
-});
+  state.products[targetIndex].approved=true;
 
 },
-ApproveThree(state,action:PayloadAction<{}>){
-        var id = action.payload.id;
-
-        state.products.forEach((element) => {
-          if(element.id === id) {
-            element.Approve=true;
-          }
-       
-      });
-      
-      },
       addProductToCardThree(state, action: PayloadAction<CartItemDetail>) {
      
         state.products.push(action.payload)

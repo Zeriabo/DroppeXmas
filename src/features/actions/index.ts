@@ -20,6 +20,57 @@ function calculateTotal(cart:Cart)
 {
   return cart.products.reduce((a, b) => a + b.price, 0);
 }
+function checkDiscounts(card1: Cart,card2: Cart, card3: Cart, card4: Cart, card5: Cart) {
+  
+var products: CartItemDetail[] = card1.products.concat(card2.products).concat(card3.products).concat(card4.products).concat(card5.products)
+
+var productsUnique : CartItemDetail[]=Object.values(products.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{}))
+
+
+
+var resultToReturn = productsUnique.filter((element, index) => {
+    var count: number=0;
+  products.forEach((p)=>{
+        if(p.id==element.id)
+        {
+            count++;
+        }
+        
+    }
+   
+    )
+ 
+    if(count>1)
+    {
+        var o =(count*10)
+    }
+    if(o>=20)
+    {
+        
+        console.log(element)
+        products.forEach((product)=>{
+            if(product.id==element.id)
+            {
+              var sum =  product.price+element.price;
+              var percentage=100-o
+              sum = (sum*percentage/100)/2;
+               if(product.price!=sum)
+               {
+                   product.price=sum
+               }
+            }
+        })
+       
+    //  var   objIndex = products.findIndex((obj => obj.id == element.id));
+    
+    //  console.log(products[objIndex])
+    }
+    console.log(element.title,count) 
+});
+
+console.log(resultToReturn)
+}
+
 function fillProducts(cart:Cart, products:CartItemDetail[] )
 {
 
@@ -40,7 +91,9 @@ var total:number=0;
 
      });
   
-    console.log(cart)
+ 
+
+
   if(found)
   {
     var  pToInsert={
@@ -81,6 +134,8 @@ export const fetchCards =  () => {
             var card4= fillProducts(cards.data[3],products.data)
             var card5= fillProducts(cards.data[4],products.data)
 
+            checkDiscounts(card1,card2,card3,card4,card5)
+
              dispatch(card1Success(card1) )
          
 
@@ -110,3 +165,6 @@ export const fetchProducts =  () => {
         }
     }
 }
+
+
+

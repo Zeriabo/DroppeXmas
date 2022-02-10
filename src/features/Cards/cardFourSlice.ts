@@ -73,6 +73,19 @@ console.log(action.payload)
         
    
       },
+      ApproveCard4(state,action:PayloadAction<{}>){
+        var id = action.payload.id;
+      var  targetIndex = state.products.findIndex((obj => obj.id == id));
+  
+        state.products[targetIndex].approved=true;
+  
+      },
+      Declinecard4(state,action:PayloadAction<{}>){
+        var id = action.payload.id;
+        var  targetIndex = state.products.findIndex((obj => obj.id == id));
+    
+          state.products[targetIndex].approved=false;
+      },
       calcCard4Total(state,action:PayloadAction<{}>) {       
         state.total+=action.payload.price;
       
@@ -87,5 +100,5 @@ console.log(action.payload)
     },
   })
   
-  export const { addProductToCardFour,card4Success, removeProductFromCardFour,IncrementAmountFour,calcCard4Total,calcTotalCard4Decrement,decreaseAmountFour } = cardFourSlice.actions
+  export const { addProductToCardFour,card4Success, removeProductFromCardFour,IncrementAmountFour,calcCard4Total,calcTotalCard4Decrement,decreaseAmountFour,Declinecard4 ,ApproveCard4} = cardFourSlice.actions
   export default cardFourSlice.reducer

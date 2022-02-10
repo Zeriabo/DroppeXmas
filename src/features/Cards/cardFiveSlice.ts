@@ -82,8 +82,21 @@ export interface CardFiveState {
         state.total-=action.payload.price;
     
   },
+  ApproveCard5(state,action:PayloadAction<{}>){
+    var id = action.payload.id;
+  var  targetIndex = state.products.findIndex((obj => obj.id == id));
+
+    state.products[targetIndex].approved=true;
+
+  },
+  Declinecard5(state,action:PayloadAction<{}>){
+    var id = action.payload.id;
+    var  targetIndex = state.products.findIndex((obj => obj.id == id));
+
+      state.products[targetIndex].approved=false;
+  },
     },
   })
   
-  export const { addProductToCardFive,card5Success,decreaseAmountFive, removeProductFromCardFive,IncrementAmountFive,calcCard5Total,calcTotalCard5Decrement } = cardFiveSlice.actions
+  export const { addProductToCardFive,card5Success,decreaseAmountFive,ApproveCard5,Declinecard5, removeProductFromCardFive,IncrementAmountFive,calcCard5Total,calcTotalCard5Decrement } = cardFiveSlice.actions
   export default cardFiveSlice.reducer
