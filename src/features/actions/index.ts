@@ -20,7 +20,7 @@ function calculateTotal(cart:Cart)
 {
   return cart.products.reduce((a, b) => a + b.price, 0);
 }
-function checkDiscounts(card1: Cart,card2: Cart, card3: Cart, card4: Cart, card5: Cart) {
+function applyDiscounts(card1: Cart,card2: Cart, card3: Cart, card4: Cart, card5: Cart) {
   
 var products: CartItemDetail[] = card1.products.concat(card2.products).concat(card3.products).concat(card4.products).concat(card5.products)
 
@@ -46,8 +46,7 @@ var resultToReturn = productsUnique.filter((element, index) => {
     }
     if(o>=20)
     {
-        
-        console.log(element)
+   
         products.forEach((product)=>{
             if(product.id==element.id)
             {
@@ -61,15 +60,73 @@ var resultToReturn = productsUnique.filter((element, index) => {
             }
         })
        
-    //  var   objIndex = products.findIndex((obj => obj.id == element.id));
-    
-    //  console.log(products[objIndex])
+
     }
-    console.log(element.title,count) 
+ 
 });
 
-console.log(resultToReturn)
 }
+function adjustGiftsToFavorite(products:CartItemDetail[],n:number)
+{
+   while(products.length>n)
+   {
+      products.pop();
+   }
+}
+
+function adjustProducts(cartproducts: CartItemDetail[], normAmount: number, products: CartItemDetail[]) {
+   
+   while(cartproducts.length<normAmount)
+    {
+       var  item = products[Math.floor(Math.random()*products.length)];
+         cartproducts.push(item)
+
+    }
+}
+
+function checkAndModifyGifts(card1: Cart, card2: Cart, card3: Cart, card4: Cart, card5: Cart,products: []) {
+  
+//favorite child is the one having card1
+var ar:number[]=[];
+ ar.push(card1.products.length)
+ ar.push(card2.products.length)
+ ar.push(card3.products.length)
+ ar.push(card4.products.length)
+ ar.push(card5.products.length)
+ var max= Math.max(...ar);
+
+
+ if(card2.products.length==max)
+ { 
+    adjustGiftsToFavorite(card2.products,max-1)
+    
+ }
+ if(card3.products.length==max)
+ {
+    adjustGiftsToFavorite(card3.products,max-1)
+ }
+ if(card4.products.length==max)
+ {
+    adjustGiftsToFavorite(card4.products,max-1)
+ }
+ if(card5.products.length==max)
+ {
+    adjustGiftsToFavorite(card5.products,max-1)
+ }
+ var aradjusted:number[]=[];
+ aradjusted.push(card2.products.length)
+ aradjusted.push(card3.products.length)
+ aradjusted.push(card4.products.length)
+ aradjusted.push(card5.products.length)
+ var normAmount= Math.max(...aradjusted);
+
+adjustProducts(card2.products,normAmount,products)
+adjustProducts(card3.products,normAmount,products)
+adjustProducts(card4.products,normAmount,products)
+adjustProducts(card5.products,normAmount,products)
+ 
+}
+
 
 function fillProducts(cart:Cart, products:CartItemDetail[] )
 {
@@ -134,11 +191,10 @@ export const fetchCards =  () => {
             var card4= fillProducts(cards.data[3],products.data)
             var card5= fillProducts(cards.data[4],products.data)
 
-            checkDiscounts(card1,card2,card3,card4,card5)
+            applyDiscounts(card1,card2,card3,card4,card5);
+            checkAndModifyGifts(card1,card2,card3,card4,card5,products.data);
 
              dispatch(card1Success(card1) )
-         
-
              dispatch(card2Success(card2))
              dispatch(card3Success(card3))
              dispatch(card4Success(card4))
@@ -165,6 +221,7 @@ export const fetchProducts =  () => {
         }
     }
 }
+
 
 
 
