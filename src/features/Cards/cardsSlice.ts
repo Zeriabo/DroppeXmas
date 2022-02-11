@@ -18,9 +18,16 @@ export interface CardsState {
    
      addcard : (state, action:PayloadAction<{}>) => {
          var b:boolean=false;
-         state.map((element)=>{
-       b=element.id ==action.payload
-         })
+         
+       state.forEach((e)=>{
+       if(e.id==action.payload.id)
+       {
+         console.log("equals")
+       b=true;
+       return;
+       }
+       })
+         console.log(b)
          if(!b){
             state.push(action.payload)
          }

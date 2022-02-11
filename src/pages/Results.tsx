@@ -26,7 +26,18 @@ const Results : React.FunctionComponent = props =>{
           <td colSpan="2">{cards.card1.id}</td>
           <td colSpan="2">{cards.card1.products.length}</td>
           <td colSpan="2">{cards.card1.total}</td>
-          <td colSpan="2">yes</td>
+          <td colSpan="2" >{ 
+          
+          (cards.cards.map((e)=> {
+            
+            if(parseInt(e.id)===1){
+             return "confirmed"
+            }
+            
+           
+          }))
+          }</td>
+    
     
         </tr>
         <tr>
@@ -60,11 +71,21 @@ const Results : React.FunctionComponent = props =>{
           <td colSpan="2">{cards.card2.id}</td>
           <td colSpan="2">{cards.card2.products.length}</td>
           <td colSpan="2">{cards.card2.total}</td>
-          <td colSpan="2">yes</td>
+          <td colSpan="2" >{ 
+          
+          (cards.cards.map((e)=> {
+            
+            if(parseInt(e.id)===2){
+             return "confirmed"
+            }
+            
+           
+          }))
+          }</td>
     
         </tr>
         <tr>
-          <tr><strong>Products child {cards.card2.id} Card :</strong></tr>
+          <tr><b>Products child {cards.card2.id} Card :</b></tr>
 
         {cards.card2.products.map(item => {
       return (
@@ -87,15 +108,25 @@ const Results : React.FunctionComponent = props =>{
           <th colSpan="2">Confirmed</th>
         </tr>
         <tr>
-          <td colSpan="2">{cards.card3.date}</td>
-          <td colSpan="2">{cards.card3.id}</td>
-          <td colSpan="2">{cards.card3.products.length}</td>
-          <td colSpan="2">{cards.card3.total}</td>
-          <td colSpan="2">yes</td>
+          <td colSpan="2">{cards.card2.date}</td>
+          <td colSpan="2">{cards.card2.id}</td>
+          <td colSpan="2">{cards.card2.products.length}</td>
+          <td colSpan="2">{cards.card2.total}</td>
+          <td colSpan="2" >{ 
+          
+          (cards.cards.map((e)=> {
+            
+            if(parseInt(e.id)===3){
+             return "confirmed"
+            }
+            
+           
+          }))
+          }</td>
     
         </tr>
         <tr>
-          <tr><strong>Products child {cards.card3.id} Card :</strong></tr>
+          <tr><b>Products child {cards.card3.id} Card :</b></tr>
 
         {cards.card3.products.map(item => {
       return (
@@ -121,11 +152,20 @@ const Results : React.FunctionComponent = props =>{
           <td colSpan="2">{cards.card4.id}</td>
           <td colSpan="2">{cards.card4.products.length}</td>
           <td colSpan="2">{cards.card4.total}</td>
-          <td colSpan="2">yes</td>
-    
+          <td colSpan="2" >{ 
+          
+          (cards.cards.map((e)=> {
+            
+            if(parseInt(e.id)===4){
+             return "confirmed"
+            }
+            
+           
+          }))
+          }</td>
         </tr>
         <tr>
-          <tr><strong>Products child {cards.card4.id} Card :</strong></tr>
+          <tr><b>Products child {cards.card4.id} Card :</b></tr>
 
         {cards.card4.products.map(item => {
       return (
@@ -153,11 +193,20 @@ const Results : React.FunctionComponent = props =>{
           <td colSpan="2">{cards.card5.id}</td>
           <td colSpan="2">{cards.card5.products.length}</td>
           <td colSpan="2">{cards.card5.total}</td>
-          <td colSpan="2">yes</td>
-    
+          <td colSpan="2" >{ 
+          
+          (cards.cards.map((e)=> {
+            
+            if(parseInt(e.id)===5){
+             return "confirmed"
+            }
+            
+           
+          }))
+          }</td>
         </tr>
         <tr>
-          <tr><strong>Products child {cards.card5.id} Card :</strong></tr>
+          <tr><b>Products child {cards.card5.id} Card :</b></tr>
 
         {cards.card5.products.map(item => {
       return (
