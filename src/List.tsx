@@ -66,23 +66,27 @@ Object.values(cards.reducer).forEach(val =>{
 const requestOptions = {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({card1 })
+  body: JSON.stringify( {})
 };
-fetch('https://fakestoreapi.com/carts',{
-            method:"POST",
-            body:JSON.stringify(
-                {
-                  body:JSON.stringify(
-                    {
-                        requestOptions
-                    }
-                )
-                }
+console.log(approvedCarts)
+approvedCarts.forEach((cart)=>{
+  var prods= JSON.stringify(cart.products)
+    fetch('https://fakestoreapi.com/carts',{
+        method:requestOptions.method,
+        body:JSON.stringify(
+            {
+                prods
+            }
             )
-        })
-            .then(res=>res.json())
-            .then(setIsPending('false'))
-            .then(navigate("/result")); 
+            }
+        ).then(setIsPending('false'))
+        .then(navigate("/result"));
+    })
+     //   .then(res=>res.json())
+
+
+           /// .then(setIsPending('false'))
+            ///.then(navigate("/result")); 
       }
       
   return (
