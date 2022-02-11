@@ -45,6 +45,9 @@ const CartItem: React.FC<Props> = ({ item }) => {
     if(item.cart==4)
     {
       dispatch(calcCard4Total(item))
+    } if(item.cart==5)
+    {
+      dispatch(calcCard5Total(item))
     }
   }, []);   
 
