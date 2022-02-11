@@ -1,14 +1,64 @@
 import React, { useEffect } from 'react';
 import { useAppSelector } from '../app/hooks';
+import { Cart, CartItemDetail } from '../List';
 import IPage from './page'; 
 
 
 const Results : React.FunctionComponent = props =>{
   const cards = useAppSelector(state=>state.reducer)
-  useEffect(()=> {
-    console.log(cards)
-  },[]);
 
+  function checkCardIfApproved(cardToBeChecked: { date?: string; id: any; products?: CartItemDetail[]; userId?: number; total?: number; })
+  { var bool =false
+   
+    cards.cards.forEach((card)=>{
+      if(card.id==cardToBeChecked.id)
+    {
+      bool= true
+    }
+    })
+    return bool;
+  }
+  function getTotalToPay() {
+    var totalToPay:number=0;
+    var products=[];
+    var approvedCarts=[];
+    
+if(checkCardIfApproved(cards.card1))
+{
+  approvedCarts.push(cards.card1)
+}
+if(checkCardIfApproved(cards.card2))
+{
+  approvedCarts.push(cards.card2)
+}
+if(checkCardIfApproved(cards.card3))
+{
+  approvedCarts.push(cards.card3)
+}
+if(checkCardIfApproved(cards.card4))
+{ 
+  approvedCarts.push(cards.card4)
+}
+if(checkCardIfApproved(cards.card5))
+{
+  approvedCarts.push(cards.card5)
+}
+
+approvedCarts.forEach((cart:Cart)=>{
+ products.push(cart.products)
+ })
+
+products.forEach((product)=>{
+  product.forEach((element)=>{
+    if(element.approved)
+    totalToPay+=element.price
+  })
+
+
+ 
+})
+return totalToPay;
+    }
   return  <div className="Results">
     <div>
     <table border="1">
@@ -40,9 +90,8 @@ const Results : React.FunctionComponent = props =>{
     
     
         </tr>
-        <tr>
-          <tr><strong>Products child {cards.card1.id} Card :</strong></tr>
-
+        <tr><td><b>Products child {cards.card1.id} Card :</b></td></tr>
+     
         {cards.card1.products.map(item => {
       return (
         <tr key={item.id}>
@@ -53,9 +102,9 @@ const Results : React.FunctionComponent = props =>{
         </tr>
       );
     })}
-        </tr>
+     
        
-        <hr />
+      
 
 
 
@@ -84,9 +133,8 @@ const Results : React.FunctionComponent = props =>{
           }</td>
     
         </tr>
-        <tr>
-          <tr><b>Products child {cards.card2.id} Card :</b></tr>
-
+        <tr><td><b>Products child {cards.card2.id} Card :</b></td></tr>
+   
         {cards.card2.products.map(item => {
       return (
         <tr key={item.id}>
@@ -97,9 +145,9 @@ const Results : React.FunctionComponent = props =>{
         </tr>
       );
     })}
-        </tr>
+      
        
-        <hr />
+     
         <tr>
           <th colSpan="2">Card date</th>
           <th colSpan="2">Child number</th>
@@ -108,10 +156,10 @@ const Results : React.FunctionComponent = props =>{
           <th colSpan="2">Confirmed</th>
         </tr>
         <tr>
-          <td colSpan="2">{cards.card2.date}</td>
-          <td colSpan="2">{cards.card2.id}</td>
-          <td colSpan="2">{cards.card2.products.length}</td>
-          <td colSpan="2">{cards.card2.total}</td>
+          <td colSpan="2">{cards.card3.date}</td>
+          <td colSpan="2">{cards.card3.id}</td>
+          <td colSpan="2">{cards.card3.products.length}</td>
+          <td colSpan="2">{cards.card3.total}</td>
           <td colSpan="2" >{ 
           
           (cards.cards.map((e)=> {
@@ -125,9 +173,8 @@ const Results : React.FunctionComponent = props =>{
           }</td>
     
         </tr>
-        <tr>
-          <tr><b>Products child {cards.card3.id} Card :</b></tr>
-
+        <tr><td><b>Products child {cards.card3.id} Card :</b></td></tr>
+ 
         {cards.card3.products.map(item => {
       return (
         <tr key={item.id}>
@@ -139,7 +186,7 @@ const Results : React.FunctionComponent = props =>{
         
       );
     })}
-        </tr>
+     
         <tr>
           <th colSpan="2">Card date</th>
           <th colSpan="2">Child number</th>
@@ -164,9 +211,9 @@ const Results : React.FunctionComponent = props =>{
           }))
           }</td>
         </tr>
-        <tr>
-          <tr><b>Products child {cards.card4.id} Card :</b></tr>
-
+       
+          <tr><td><b>Products child {cards.card4.id} Card :</b></td></tr>
+      
         {cards.card4.products.map(item => {
       return (
         <tr key={item.id}>
@@ -177,10 +224,10 @@ const Results : React.FunctionComponent = props =>{
         </tr>
       );
     })}
-        </tr>
+        
      
 
-        <hr />
+  
         <tr>
           <th colSpan="2">Card date</th>
           <th colSpan="2">Child number</th>
@@ -205,9 +252,10 @@ const Results : React.FunctionComponent = props =>{
           }))
           }</td>
         </tr>
-        <tr>
-          <tr><b>Products child {cards.card5.id} Card :</b></tr>
-
+      
+       
+       <tr><td><b>Products child {cards.card5.id} Card :</b></td></tr>
+ 
         {cards.card5.products.map(item => {
       return (
         <tr key={item.id}>
@@ -218,11 +266,14 @@ const Results : React.FunctionComponent = props =>{
         </tr>
       );
     })}
-        </tr>
-     
-        <hr />
-       
    
+     
+      <tr>
+        <td>
+        <p>Total to pay : {getTotalToPay()}</p>
+        </td>
+      </tr>
+    
       </tbody>
     </table>
 
@@ -232,3 +283,5 @@ const Results : React.FunctionComponent = props =>{
 
 }
 export default Results;
+
+

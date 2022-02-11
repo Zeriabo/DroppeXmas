@@ -54,7 +54,7 @@ const ar: Cart[]=  cards.reducer.cards
 ar.forEach((cart)=>{
   approvedCarts.push(cart)
 })
-console.log(approvedCarts)
+
 
 Object.values(cards.reducer).forEach(val =>{
   if(!approvedCarts.includes(val) && !Array.isArray(val))
@@ -62,7 +62,6 @@ Object.values(cards.reducer).forEach(val =>{
     declinedCarts.push(val)
   }
 });
-console.log(declinedCarts)
 
 const requestOptions = {
   method: 'POST',
@@ -82,7 +81,6 @@ fetch('https://fakestoreapi.com/carts',{
             )
         })
             .then(res=>res.json())
-            .then(json=>console.log(json))
             .then(setIsPending('false'))
             .then(navigate("/result")); 
       }

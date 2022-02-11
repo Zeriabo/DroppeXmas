@@ -22,7 +22,6 @@ export interface CardsState {
        state.forEach((e)=>{
        if(e.id==action.payload.id)
        {
-         console.log("equals")
        b=true;
        return;
        }
