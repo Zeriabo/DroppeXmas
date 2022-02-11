@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { Cart, CartItemDetail } from '../../App';
+import { Cart, CartItemDetail } from '../../List';
 import {product} from '../ProductsApi/productsApiSlice'
 
 export interface CardFourState {
@@ -94,10 +94,15 @@ export interface CardFourState {
         state.total-=action.payload.price;
     
   },
+  setTotal4(state,action:PayloadAction<number>) {
+  
+    state.total=action.payload;
+
+},
   
      
     },
   })
   
-  export const { addProductToCardFour,card4Success, removeProductFromCardFour,IncrementAmountFour,calcCard4Total,calcTotalCard4Decrement,decreaseAmountFour,Declinecard4 ,ApproveCard4} = cardFourSlice.actions
+  export const { addProductToCardFour,card4Success, removeProductFromCardFour,setTotal4,IncrementAmountFour,calcCard4Total,calcTotalCard4Decrement,decreaseAmountFour,Declinecard4 ,ApproveCard4} = cardFourSlice.actions
   export default cardFourSlice.reducer

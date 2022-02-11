@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { Cart, CartItemDetail } from '../../App';
+import { Cart, CartItemDetail } from '../../List';
 import {product} from '../ProductsApi/productsApiSlice'
   
 
@@ -98,6 +98,11 @@ var  targetIndex = state.products.findIndex((obj => obj.id == id));
      
     
           },
+          setTotal3(state,action:PayloadAction<number>) {
+  
+            state.total=action.payload;
+        
+      },
       calcTotalCard3(state,action:PayloadAction<{}>) {    
       
        
@@ -113,5 +118,5 @@ var  targetIndex = state.products.findIndex((obj => obj.id == id));
     },
   })
   
-  export const { addProductToCardThree,card3Success,decrementAmountThree,IncrementAmountThree,ApproveThree,DeclineThree ,calcTotalCard3Decrement,calcTotalCard3} = cardThreeSlice.actions
+  export const { addProductToCardThree,card3Success,decrementAmountThree,setTotal3,IncrementAmountThree,ApproveThree,DeclineThree ,calcTotalCard3Decrement,calcTotalCard3} = cardThreeSlice.actions
   export default cardThreeSlice.reducer

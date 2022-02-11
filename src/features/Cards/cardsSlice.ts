@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { Cart, CartItemDetail } from '../../App';
+import { Cart, CartItemDetail } from '../../List';
 import {product} from '../ProductsApi/productsApiSlice'
 import cardOneSlice from './cardOneSlice';
 export interface CardsState {
@@ -27,7 +27,7 @@ export interface CardsState {
        return;
        }
        })
-         console.log(b)
+        
          if(!b){
             state.push(action.payload)
          }
@@ -35,10 +35,11 @@ export interface CardsState {
       
         
      },
+   
  
    
     },
   })
   
-  export const { addcard} = cardsSlice.actions
+  export const { addcard,getCard} = cardsSlice.actions
   export default cardsSlice.reducer

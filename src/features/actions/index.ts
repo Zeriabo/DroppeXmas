@@ -6,7 +6,7 @@ import {card3Success} from '../Cards/cardThreeSlice'
 import { card4Success } from '../Cards/cardFourSlice'
 import { card5Success } from '../Cards/cardFiveSlice'
 import { productsSuccess } from '../Products/productsSlice'
-import { Cart, CartItemDetail } from '../../App'
+import { Cart, CartItemDetail } from '../../List'
 const fetchCardsSuccess = (cards: any) => ({
     type: 'FETCH_CARDS',
     payload: { cards }
@@ -16,9 +16,14 @@ const fetchProductsSuccess = (products: any) => ({
     type: "FETCH_PRODUCTS",
     payload: { products }
 })
-function calculateTotal(cart:Cart)
+function calculateTotal(newcart:Cart)
 {
-  return cart.products.reduce((a, b) => a + b.price, 0);
+  
+    newcart.products.forEach((prod)=>{
+    
+})
+ 
+  return newcart.products.reduce((a, b) => a + b.price, 0);
 }
 function applyDiscounts(card1: Cart,card2: Cart, card3: Cart, card4: Cart, card5: Cart) {
   
@@ -73,7 +78,7 @@ function adjustGiftsToFavorite(products:CartItemDetail[],n:number)
 }
 
 function adjustProducts(cartproducts: CartItemDetail[], normAmount: number, products: CartItemDetail[]) {
-   
+   var newcartprod:CartItemDetail[]=[];
    while(cartproducts.length<normAmount)
     {
        var pickfrom:CartItemDetail[]=[];
@@ -99,10 +104,11 @@ function adjustProducts(cartproducts: CartItemDetail[], normAmount: number, prod
 
        item.cart=cart
        item.approved=false
-
+         
          cartproducts.push(item)
 
     }
+   
 }
 
 function checkAndModifyGifts(card1: Cart, card2: Cart, card3: Cart, card4: Cart, card5: Cart,products: []) {
@@ -190,6 +196,7 @@ newCart.products.push(pToInsert);
 
 
 total =calculateTotal(newCart)
+
 newCart.total=total;
  return newCart;
 

@@ -2,10 +2,15 @@ import React, { useEffect } from "react";
 import { Wrapper } from "../atoms/cart";
 import { ButtonWrapper } from "../atoms/button";
 import CartItem from "./CartItem";
-import { CartItemDetail } from "../../App";
+import { CartItemDetail } from "../../List";
 import useForceUpdate from 'use-force-update';
-import {addcard} from '../../features/Cards/cardsSlice'
+import {addcard,getCard} from '../../features/Cards/cardsSlice'
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import {setTotal} from "../../features/Cards/cardOneSlice"
+import { setTotal2 } from "../../features/Cards/cardTwoSlice";
+import { setTotal3 } from "../../features/Cards/cardThreeSlice";
+import { setTotal4 } from "../../features/Cards/cardFourSlice";
+import { setTotal5 } from "../../features/Cards/cardFiveSlice";
 
 type Props = {
   childId: number,
@@ -25,6 +30,7 @@ const Cart: React.FC<Props> = ({ cartItems,child }) => {
   const card3 = useAppSelector(state=>state.reducer.card3)
   const card4 = useAppSelector(state=>state.reducer.card4)
   const card5 = useAppSelector(state=>state.reducer.card5)
+
 function confirm(cardnumber:number)
 {
 
@@ -72,15 +78,36 @@ const decreaseAmount=(clicked:CartItemDetail)=>{
 function calculateTotal(items:any)
 { 
 
-    var price: any=0;
+    var totalprice: any=0;
  items.forEach((element: CartItemDetail) => {
  
-     price=price+(element.price*element.amount);
-
+     totalprice=totalprice+(element.price*element.amount);
+  
  });
- 
-    return price;
+
+ if(items[0]?.cart==1)
+ {
+  dispatch(setTotal(totalprice)) 
+ }
+ if(items[0]?.cart==2)
+ {
+  dispatch(setTotal2(totalprice)) 
+ }
+ if(items[0]?.cart==3)
+ {
+  dispatch(setTotal3(totalprice)) 
+ }
+ if(items[0]?.cart==4)
+ {
+  dispatch(setTotal4(totalprice)) 
+ }
+ if(items[0]?.cart==5)
+ {
+  dispatch(setTotal5(totalprice)) 
+ }
+    return totalprice;
 }
+
 
   return  (
     <Wrapper>
@@ -91,6 +118,7 @@ function calculateTotal(items:any)
         <CartItem  item={item} decline={handleDecline} approve={handleApprove} key={item.id}   addToCart={addToCart} removeFromCart={decreaseAmount} />
       ))}
       <h2>Total: {calculateTotal(cartItems)} EUR</h2>
+    
 
       <button type="button"  onClick={() => confirm(cartItems[0].cart)}>Confirm</button>
     </Wrapper>
@@ -98,6 +126,10 @@ function calculateTotal(items:any)
 };
 
 export default Cart;
+
+
+
+
 
 
 

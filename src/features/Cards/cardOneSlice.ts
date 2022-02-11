@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { Cart, CartItemDetail } from '../../App';
+import { Cart, CartItemDetail } from '../../List';
 import {product} from '../ProductsApi/productsApiSlice'
 
 export interface CardOneState {
@@ -70,6 +70,7 @@ export interface CardOneState {
 
       },
       IncrementAmountOne(state, action: PayloadAction<number>) {
+        
         var id = action.payload.id;
        state.products.forEach((element, index) => {
         if(element.id === id) {
@@ -79,7 +80,7 @@ export interface CardOneState {
     });
       
       },
-      decreaseAmountOne(state,action: PayloadAction<{}>) {
+      decreaseAmountOne(state,action: PayloadAction<CartItemDetail>) {
     
         var id = action.payload.id;
       
@@ -97,17 +98,22 @@ export interface CardOneState {
         
    
       },
-      calcCard1Total(state,action:PayloadAction<{}>) {       
+      setTotal(state,action:PayloadAction<number>) {
+  
+        state.total=action.payload;
+    
+  },
+      calcCard1Total(state,action:PayloadAction<CartItemDetail>) {       
         state.total+=action.payload.price;
       
       },
-      calcTotalCard1Decrement(state,action:PayloadAction<{}>) {
+      calcTotalCard1Decrement(state,action:PayloadAction<CartItemDetail>) {
   
         state.total-=action.payload.price;
     
   },
   
-  Decline(state,action:PayloadAction<{}>){
+  Decline(state,action:PayloadAction<CartItemDetail>){
     var id = action.payload.id;
     var  targetIndex = state.products.findIndex((obj => obj.id == id));
 
@@ -116,10 +122,10 @@ export interface CardOneState {
   calcTotal(state,action:PayloadAction<{}>) {    
       
        
-    state.total+=action.payload.price;
+    state.total =state.total;
    
    },
-   calcTotalDecrement(state,action:PayloadAction<{}>) {    
+   calcTotalDecrement(state,action:PayloadAction<CartItemDetail>) {    
       
        
     state.total-=action.payload.price;
@@ -128,5 +134,5 @@ export interface CardOneState {
     },
   })
   
-  export const { addProductToCardOne,replaceProducts,card1Success,calcTotal,calcTotalDecrement,Approve,Decline, initiateState,removeProductFromCardOne,IncrementAmountOne,calcCard1Total,decreaseAmountOne } = cardOneSlice.actions
+  export const { addProductToCardOne,replaceProducts,card1Success,calcTotal,calcTotalDecrement,Approve,Decline, initiateState,removeProductFromCardOne,IncrementAmountOne,calcCard1Total,decreaseAmountOne,setTotal } = cardOneSlice.actions
   export default cardOneSlice.reducer

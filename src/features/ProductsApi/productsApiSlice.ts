@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { CartItemDetail } from '../../App'
+import { CartItemDetail } from '../../List'
 
  export interface product{
      id:number,
