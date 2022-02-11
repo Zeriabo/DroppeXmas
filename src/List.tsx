@@ -69,6 +69,19 @@ const requestOptions = {
   body: JSON.stringify( {})
 };
 console.log(approvedCarts)
+declinedCarts.forEach((cart)=>{
+    var prods= JSON.stringify(cart.products)
+      fetch('https://fakestoreapi.com/carts',{
+          method:requestOptions.method,
+          body:JSON.stringify(
+              {
+                  prods
+              }
+              )
+              }
+          ).then(console.log("declined Cards pushed"))
+         
+      })
 approvedCarts.forEach((cart)=>{
   var prods= JSON.stringify(cart.products)
     fetch('https://fakestoreapi.com/carts',{
