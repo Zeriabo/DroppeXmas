@@ -1,12 +1,12 @@
 import axios from 'axios'
 import { useAppDispatch } from '../../app/hooks'
-import {card1Success,initiateState} from '../Cards/cardOneSlice'
-import {card2Success} from '../Cards/cardTwoSlice'
-import {card3Success} from '../Cards/cardThreeSlice'
+import { card1Success, initiateState } from '../Cards/cardOneSlice'
+import { card2Success } from '../Cards/cardTwoSlice'
+import { card3Success } from '../Cards/cardThreeSlice'
 import { card4Success } from '../Cards/cardFourSlice'
 import { card5Success } from '../Cards/cardFiveSlice'
 import { productsSuccess } from '../Products/productsSlice'
-import { Cart, CartItemDetail } from '../../List'
+import { Cart, CartItemDetail } from '../../pages/List'
 const fetchCardsSuccess = (cards: any) => ({
     type: 'FETCH_CARDS',
     payload: { cards }
@@ -16,231 +16,211 @@ const fetchProductsSuccess = (products: any) => ({
     type: "FETCH_PRODUCTS",
     payload: { products }
 })
-function calculateTotal(newcart:Cart)
-{
-  
-    newcart.products.forEach((prod)=>{
-    
-})
- 
-  return newcart.products.reduce((a, b) => a + b.price, 0);
-}
-function applyDiscounts(card1: Cart,card2: Cart, card3: Cart, card4: Cart, card5: Cart) {
-  
-var products: CartItemDetail[] = card1.products.concat(card2.products).concat(card3.products).concat(card4.products).concat(card5.products)
+function calculateTotal(newcart: Cart) {
 
-var productsUnique : CartItemDetail[]=Object.values(products.reduce((acc,cur)=>Object.assign(acc,{[cur.id]:cur}),{}))
+    newcart.products.forEach((prod) => {
 
-
-
- productsUnique.filter((element, index) => {
-    var count: number=0;
-  products.forEach((p)=>{
-        if(p.id==element.id)
-        {
-            count++;
-        }
-        
     })
- 
-    if(count>1)
-    {
-        var o =(count*10)
-    }
-    if(o>=20)
-    {
-   
-        products.forEach((product)=>{
-            if(product.id==element.id)
-            {
-              var sum =  product.price+element.price;
-              var percentage=100-o
-              sum = (sum*percentage/100)/2;
-               if(product.price!=sum)
-               {
-                   product.price=sum
-               }
-            }
-        })
-       
 
-    }
- 
-});
+    return newcart.products.reduce((a, b) => a + b.price, 0);
+}
+function applyDiscounts(card1: Cart, card2: Cart, card3: Cart, card4: Cart, card5: Cart) {
+
+    var products: CartItemDetail[] = card1.products.concat(card2.products).concat(card3.products).concat(card4.products).concat(card5.products)
+
+    var productsUnique: CartItemDetail[] = Object.values(products.reduce((acc, cur) => Object.assign(acc, { [cur.id]: cur }), {}))
+
+
+
+    productsUnique.filter((element, index) => {
+        var count: number = 0;
+        products.forEach((p) => {
+            if (p.id == element.id) {
+                count++;
+            }
+
+        })
+
+        if (count > 1) {
+            var o = (count * 10)
+        }
+        if (o >= 20) {
+
+            products.forEach((product) => {
+                if (product.id == element.id) {
+                    var sum = product.price + element.price;
+                    var percentage = 100 - o
+                    sum = (sum * percentage / 100) / 2;
+                    if (product.price != sum) {
+                        product.price = sum
+                    }
+                }
+            })
+
+
+        }
+
+    });
 
 }
-function adjustGiftsToFavorite(products:CartItemDetail[],n:number)
-{
-   while(products.length>n)
-   {
-      products.pop();
-   }
+function adjustGiftsToFavorite(products: CartItemDetail[], n: number) {
+    while (products.length > n) {
+        products.pop();
+    }
 }
 
 function adjustProducts(cartproducts: CartItemDetail[], normAmount: number, products: CartItemDetail[]) {
-   var newcartprod:CartItemDetail[]=[];
-   while(cartproducts.length<normAmount)
-    {
-       var pickfrom:CartItemDetail[]=[];
-       for(var i=0; i <products.length;i++)
-       {
+    var newcartprod: CartItemDetail[] = [];
+    while (cartproducts.length < normAmount) {
+        var pickfrom: CartItemDetail[] = [];
+        for (var i = 0; i < products.length; i++) {
 
-           if(!cartproducts.includes(products[i]))
-           {
-            pickfrom.push(products[i])
-           }
-       }
-       var  item = pickfrom[Math.floor(Math.random()*products.length)];
-       item.amount=1;
-       var cart: number;
-       for(var i=0; i <cartproducts.length;i++)
-       {
+            if (!cartproducts.includes(products[i])) {
+                pickfrom.push(products[i])
+            }
+        }
+        var item = pickfrom[Math.floor(Math.random() * products.length)];
+        item.amount = 1;
+        var cart: number;
+        for (var i = 0; i < cartproducts.length; i++) {
 
-           if(cartproducts[i].cart!==null)
-           {
-               cart=cartproducts[i].cart
-           }
-       }
+            if (cartproducts[i].cart !== null) {
+                cart = cartproducts[i].cart
+            }
+        }
 
-       item.cart=cart
-       item.approved=false
-         
-         cartproducts.push(item)
+        item.cart = cart
+        item.approved = false
+
+        cartproducts.push(item)
 
     }
-   
+
 }
 
-function checkAndModifyGifts(card1: Cart, card2: Cart, card3: Cart, card4: Cart, card5: Cart,products: []) {
-  
-//favorite child is the one having card1
-var ar:number[]=[];
- ar.push(card1.products.length)
- ar.push(card2.products.length)
- ar.push(card3.products.length)
- ar.push(card4.products.length)
- ar.push(card5.products.length)
- var max= Math.max(...ar);
+function checkAndModifyGifts(card1: Cart, card2: Cart, card3: Cart, card4: Cart, card5: Cart, products: []) {
 
- if(card2.products.length==max)
- { 
-    adjustGiftsToFavorite(card2.products,max-1)
-    
- }
- if(card3.products.length==max)
- {
-    adjustGiftsToFavorite(card3.products,max-1)
- }
- if(card4.products.length==max)
- {
-    adjustGiftsToFavorite(card4.products,max-1)
- }
- if(card5.products.length==max)
- {
-    adjustGiftsToFavorite(card5.products,max-1)
- }
- var aradjusted:number[]=[];
- aradjusted.push(card2.products.length)
- aradjusted.push(card3.products.length)
- aradjusted.push(card4.products.length)
- aradjusted.push(card5.products.length)
- var normAmount= Math.max(...aradjusted);
+    //favorite child is the one having card1
+    var ar: number[] = [];
+    ar.push(card1.products.length)
+    ar.push(card2.products.length)
+    ar.push(card3.products.length)
+    ar.push(card4.products.length)
+    ar.push(card5.products.length)
+    var max = Math.max(...ar);
 
-adjustProducts(card2.products,normAmount,products)
-adjustProducts(card3.products,normAmount,products)
-adjustProducts(card4.products,normAmount,products)
-adjustProducts(card5.products,normAmount,products)
- 
+    if (card2.products.length == max) {
+        adjustGiftsToFavorite(card2.products, max - 1)
+
+    }
+    if (card3.products.length == max) {
+        adjustGiftsToFavorite(card3.products, max - 1)
+    }
+    if (card4.products.length == max) {
+        adjustGiftsToFavorite(card4.products, max - 1)
+    }
+    if (card5.products.length == max) {
+        adjustGiftsToFavorite(card5.products, max - 1)
+    }
+    var aradjusted: number[] = [];
+    aradjusted.push(card2.products.length)
+    aradjusted.push(card3.products.length)
+    aradjusted.push(card4.products.length)
+    aradjusted.push(card5.products.length)
+    var normAmount = Math.max(...aradjusted);
+
+    adjustProducts(card2.products, normAmount, products)
+    adjustProducts(card3.products, normAmount, products)
+    adjustProducts(card4.products, normAmount, products)
+    adjustProducts(card5.products, normAmount, products)
+
 }
 
 
-function fillProducts(cart:Cart, products:CartItemDetail[] )
-{
+function fillProducts(cart: Cart, products: CartItemDetail[]) {
 
-  var newCart :Cart={
-      id: cart.id,
-      date: cart.date,
-      products: [],
-      total: 0
-  };
-var total:number=0;
+    var newCart: Cart = {
+        id: cart.id,
+        date: cart.date,
+        products: [],
+        total: 0
+    };
+    var total: number = 0;
 
-    
+
     cart.products.forEach(
-    (element) => {
-     const found = products.find(function(elem,index)
-     {
-       return elem.id==element.productId
+        (element) => {
+            const found = products.find(function (elem, index) {
+                return elem.id == element.productId
 
-     });
-  
-  if(found)
-  {
-    var  pToInsert={
-      id: found.id,
-      amount : 1,
-      price:  found.price,
-      title: found.title,
-      category: found.category,
-      image: found.image,
-      rating: found.rating,
-      cart: cart.id,
-      description: found.description,
-      approved: false
-}
+            });
 
-newCart.products.push(pToInsert);
-  }
+            if (found) {
+                var pToInsert = {
+                    id: found.id,
+                    amount: 1,
+                    price: found.price,
+                    title: found.title,
+                    category: found.category,
+                    image: found.image,
+                    rating: found.rating,
+                    cart: cart.id,
+                    description: found.description,
+                    approved: false
+                }
 
-});
+                newCart.products.push(pToInsert);
+            }
+
+        });
 
 
-total =calculateTotal(newCart)
+    total = calculateTotal(newCart)
 
-newCart.total=total;
- return newCart;
+    newCart.total = total;
+    return newCart;
 
 }
-export const fetchCards =  () => {
+export const fetchCards = () => {
     return async (dispatch: (arg0: { type: string; payload: { cards: any } }) => void) => {
         try {
             let cards = await axios.get('https://fakestoreapi.com/carts?limit=5')
             let products = await axios.get('https://fakestoreapi.com/products?limit=30')
-           
+
             dispatch(fetchCardsSuccess(cards.data)) //store first five cards
-            var card1= fillProducts(cards.data[0],products.data)
+            var card1 = fillProducts(cards.data[0], products.data)
 
-            var card2= fillProducts(cards.data[1],products.data)
-            var card3= fillProducts(cards.data[2],products.data)
-            var card4= fillProducts(cards.data[3],products.data)
-            var card5= fillProducts(cards.data[4],products.data)
+            var card2 = fillProducts(cards.data[1], products.data)
+            var card3 = fillProducts(cards.data[2], products.data)
+            var card4 = fillProducts(cards.data[3], products.data)
+            var card5 = fillProducts(cards.data[4], products.data)
 
-            applyDiscounts(card1,card2,card3,card4,card5);
-            checkAndModifyGifts(card1,card2,card3,card4,card5,products.data);
+            applyDiscounts(card1, card2, card3, card4, card5);
+            checkAndModifyGifts(card1, card2, card3, card4, card5, products.data);
 
-             dispatch(card1Success(card1) )
-             dispatch(card2Success(card2))
-             dispatch(card3Success(card3))
-             dispatch(card4Success(card4))
-             dispatch(card5Success(card5))
-             
+            dispatch(card1Success(card1))
+            dispatch(card2Success(card2))
+            dispatch(card3Success(card3))
+            dispatch(card4Success(card4))
+            dispatch(card5Success(card5))
+
         }
-        catch(e){
+        catch (e) {
             console.log(e)
         }
 
-      
+
     }
 }
 
-export const fetchProducts =  () => {
+export const fetchProducts = () => {
     return async (dispatch: (arg0: { type: string; payload: { products: any } }) => void) => {
         try {
             let products = await axios.get('https://fakestoreapi.com/products?limit=30')
-            dispatch(fetchProductsSuccess(products.data)) 
+            dispatch(fetchProductsSuccess(products.data))
             dispatch(productsSuccess(products.data))
         }
-        catch(e){
+        catch (e) {
             console.log(e)
         }
     }

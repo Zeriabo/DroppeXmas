@@ -1,106 +1,105 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { Cart, CartItemDetail } from '../../List';
-  
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Cart, CartItemDetail } from '../../pages/List';
+
 
 export interface CardFiveState {
-    value: {
-        date: string,
-        id: number,
-        products: (CartItemDetail)[],
-        userId: number,
-        total : number,
-        __v: number
-    }
+  value: {
+    date: string,
+    id: number,
+    products: (CartItemDetail)[],
+    userId: number,
+    total: number,
+    __v: number
   }
-  const initialState = { value: {} } as CardFiveState
-  const cardFiveSlice = createSlice({
-    name: 'cardFive',
-    initialState:{
-        date: "",
-        id: 5,
-        products:[],
-        userId: 0,
-        total:0,
-        __v: 0
-    },
-    reducers: {
-      initiateState(state, action: PayloadAction<Cart>) {
-        initialState.value={ 
-          date: action.payload.date,
-         id:  action.payload.id,
-         products:  action.payload.products,
-         userId:1,
-         total:0,
-         __v: state.__v,};
-   
-         },
-         card5Success: (state, action) => {
-           state.date = action.payload.date;
-           state.id=action.payload.id;
-           state.products=action.payload.products;
-           state.total=action.payload.total;
-           state.userId=action.payload.userId;
-         
-       },
-      addProductToCardFive(state, action: PayloadAction<CartItemDetail>) {
-  
-        state.products.push(action.payload)
-      },
-      removeProductFromCardFive(state) {
-        state.products.pop()
-      },
-      IncrementAmountFive(state, action: PayloadAction<number>) {
+}
+const initialState = { value: {} } as CardFiveState
+const cardFiveSlice = createSlice({
+  name: 'cardFive',
+  initialState: {
+    date: "",
+    id: 5,
+    products: [],
+    userId: 0,
+    total: 0,
+    __v: 0
+  },
+  reducers: {
+    initiateState(state, action: PayloadAction<Cart>) {
+      initialState.value = {
+        date: action.payload.date,
+        id: action.payload.id,
+        products: action.payload.products,
+        userId: 1,
+        total: 0,
+        __v: state.__v,
+      };
 
-        state.products.forEach((val)=>
-        {
-            if(val.id==action.payload.id)
-            {
-               val.amount++;
-            }
-        })
-      },
-      decreaseAmountFive(state,action: PayloadAction<{}>) {
-    
-        var id = action.payload.id;
-  
-        state.products.forEach((element, index) => {
-          if(element.id === id) {
-            element.amount--;
-          
-          }
+    },
+    card5Success: (state, action) => {
+      state.date = action.payload.date;
+      state.id = action.payload.id;
+      state.products = action.payload.products;
+      state.total = action.payload.total;
+      state.userId = action.payload.userId;
+
+    },
+    addProductToCardFive(state, action: PayloadAction<CartItemDetail>) {
+
+      state.products.push(action.payload)
+    },
+    removeProductFromCardFive(state) {
+      state.products.pop()
+    },
+    IncrementAmountFive(state, action: PayloadAction<number>) {
+
+      state.products.forEach((val) => {
+        if (val.id == action.payload.id) {
+          val.amount++;
+        }
+      })
+    },
+    decreaseAmountFive(state, action: PayloadAction<{}>) {
+
+      var id = action.payload.id;
+
+      state.products.forEach((element, index) => {
+        if (element.id === id) {
+          element.amount--;
+
+        }
       });
-        
-   
-      },
-      calcCard5Total(state,action:PayloadAction<{}>) {       
-        state.total+=action.payload.price;
-      
-      },
-      setTotal5(state,action:PayloadAction<number>) {
-  
-        state.total=action.payload;
-    
-  },
-      calcTotalCard5Decrement(state,action:PayloadAction<{}>) {
-  
-        state.total-=action.payload.price;
-    
-  },
-  ApproveCard5(state,action:PayloadAction<{}>){
-    var id = action.payload.id;
-  var  targetIndex = state.products.findIndex((obj => obj.id == id));
 
-    state.products[targetIndex].approved=true;
 
-  },
-  Declinecard5(state,action:PayloadAction<{}>){
-    var id = action.payload.id;
-    var  targetIndex = state.products.findIndex((obj => obj.id == id));
-
-      state.products[targetIndex].approved=false;
-  },
     },
-  })
-  
-  export const { addProductToCardFive,card5Success,decreaseAmountFive,ApproveCard5,Declinecard5, setTotal5,removeProductFromCardFive,IncrementAmountFive,calcCard5Total,calcTotalCard5Decrement } = cardFiveSlice.actions
-  export default cardFiveSlice.reducer
+    calcCard5Total(state, action: PayloadAction<{}>) {
+      state.total += action.payload.price;
+
+    },
+    setTotal5(state, action: PayloadAction<number>) {
+
+      state.total = action.payload;
+
+    },
+    calcTotalCard5Decrement(state, action: PayloadAction<{}>) {
+
+      state.total -= action.payload.price;
+
+    },
+    ApproveCard5(state, action: PayloadAction<{}>) {
+      var id = action.payload.id;
+      var targetIndex = state.products.findIndex((obj => obj.id == id));
+
+      state.products[targetIndex].approved = true;
+
+    },
+    Declinecard5(state, action: PayloadAction<{}>) {
+      var id = action.payload.id;
+      var targetIndex = state.products.findIndex((obj => obj.id == id));
+
+      state.products[targetIndex].approved = false;
+    },
+  },
+})
+
+export const { addProductToCardFive, card5Success, decreaseAmountFive, ApproveCard5, Declinecard5, setTotal5, removeProductFromCardFive, IncrementAmountFive, calcCard5Total, calcTotalCard5Decrement } = cardFiveSlice.actions
+export default cardFiveSlice.reducer

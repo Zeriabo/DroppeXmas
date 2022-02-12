@@ -3,213 +3,191 @@ import { CartItemDetail } from "../../App";
 import { Wrapper } from "../atoms/cartItem";
 import { ButtonWrapper } from "../atoms/button";
 import useForceUpdate from 'use-force-update';
-import {useAppDispatch,useAppSelector} from '../../app/hooks';
-import { IncrementAmountOne ,decreaseAmountOne,Approve,Decline,calcTotal,calcTotalDecrement} from "../../features/Cards/cardOneSlice";
-import { IncrementAmountTwo ,decreaseAmountTwo,ApproveTwo,DeclineTwo, calcTotalCard2,calcTotalCard2Decrement} from "../../features/Cards/cardTwoSlice";
-import { addProductToCardFive, removeProductFromCardFive,Declinecard5,ApproveCard5,IncrementAmountFive,decreaseAmountFive,calcCard5Total,calcTotalCard5Decrement } from "../../features/Cards/cardFiveSlice";
-import  { addProductToCardFour, removeProductFromCardFour,IncrementAmountFour,calcCard4Total,calcTotalCard4Decrement,decreaseAmountFour,Declinecard4 ,ApproveCard4} from "../../features/Cards/cardFourSlice";
-import { addProductToCardThree, IncrementAmountThree,calcTotalCard3,calcTotalCard3Decrement ,ApproveThree,DeclineThree,decrementAmountThree}  from '../../features/Cards/cardThreeSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { IncrementAmountOne, decreaseAmountOne, Approve, Decline, calcTotal, calcTotalDecrement } from "../../features/Cards/cardOneSlice";
+import { IncrementAmountTwo, decreaseAmountTwo, ApproveTwo, DeclineTwo, calcTotalCard2, calcTotalCard2Decrement } from "../../features/Cards/cardTwoSlice";
+import { addProductToCardFive, removeProductFromCardFive, Declinecard5, ApproveCard5, IncrementAmountFive, decreaseAmountFive, calcCard5Total, calcTotalCard5Decrement } from "../../features/Cards/cardFiveSlice";
+import { addProductToCardFour, removeProductFromCardFour, IncrementAmountFour, calcCard4Total, calcTotalCard4Decrement, decreaseAmountFour, Declinecard4, ApproveCard4 } from "../../features/Cards/cardFourSlice";
+import { addProductToCardThree, IncrementAmountThree, calcTotalCard3, calcTotalCard3Decrement, ApproveThree, DeclineThree, decrementAmountThree } from '../../features/Cards/cardThreeSlice';
 
 //here
 type Props = {
   item: CartItemDetail;
- 
+
   addToCart: (clicked: CartItemDetail) => void;
-  
+
   removeFromCart: (clicked: CartItemDetail) => void;
 
-  approve:(clicked:CartItemDetail)=>void;
+  approve: (clicked: CartItemDetail) => void;
 
-  decline:(clicked:CartItemDetail)=>void;
-    
+  decline: (clicked: CartItemDetail) => void;
+
 };
 
-const CartItem: React.FC<Props> = ({ item }) => { 
-   const forceUpdate = useForceUpdate();
-   const dispatch= useAppDispatch();
- 
-   React.useEffect(() => {
-   
-    if(item.cart==1)
-    {
+const CartItem: React.FC<Props> = ({ item }) => {
+  const forceUpdate = useForceUpdate();
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+
+    if (item.cart == 1) {
       dispatch(calcTotal(item))
     }
-    if(item.cart==2)
-    {
+    if (item.cart == 2) {
       dispatch(calcTotalCard2(item))
     }
-    if(item.cart==3)
-    {
-      dispatch(calcTotalCard3({item}))
+    if (item.cart == 3) {
+      dispatch(calcTotalCard3({ item }))
     }
-    if(item.cart==4)
-    {
+    if (item.cart == 4) {
       dispatch(calcCard4Total(item))
-    } if(item.cart==5)
-    {
+    } if (item.cart == 5) {
       dispatch(calcCard5Total(item))
     }
-  }, []);   
+  }, []);
 
-   const decline = React.useCallback((item) => {
-   
-    if(item.cart==1)
-    {
+  const decline = React.useCallback((item) => {
+
+    if (item.cart == 1) {
       dispatch(Decline(item));
     }
-    if(item.cart==2)
-    {
+    if (item.cart == 2) {
       dispatch(DeclineTwo(item))
-    }if(item.cart==3)
-    {
+    } if (item.cart == 3) {
       dispatch(DeclineThree(item))
     }
-    if(item.cart==4)
-    {
+    if (item.cart == 4) {
       dispatch(Declinecard4(item))
     }
-    if(item.cart==5)
-    {
+    if (item.cart == 5) {
       dispatch(Declinecard5(item))
     }
-  
- 
-     forceUpdate();
-   }, [forceUpdate]);
-   const approve = React.useCallback((item) => {
 
-    if(item.cart==1)
-    {
+
+    forceUpdate();
+  }, [forceUpdate]);
+  const approve = React.useCallback((item) => {
+
+    if (item.cart == 1) {
       dispatch(Approve(item));
     }
-    if(item.cart==2)
-    {
+    if (item.cart == 2) {
       dispatch(ApproveTwo(item))
-    }if(item.cart==3)
-    {
+    } if (item.cart == 3) {
       dispatch(ApproveThree(item))
     }
-    if(item.cart==4)
-    {
+    if (item.cart == 4) {
       dispatch(ApproveCard4(item))
     }
-    if(item.cart==5)
-    {
+    if (item.cart == 5) {
       dispatch(ApproveCard5(item))
     }
-    
+
 
     forceUpdate();
   }, [forceUpdate]);
 
-const increaseAmount= React.useCallback((item) => {
+  const increaseAmount = React.useCallback((item) => {
 
-  if(item.cart==1)
- {
-  dispatch(IncrementAmountOne(item));
-  dispatch(calcTotal(item))
- }
-  if(item.cart==2)
- {
-   
-   dispatch(IncrementAmountTwo(item))
-   dispatch(calcTotalCard2(item))
- }
- if(item.cart==3)
- {
+    if (item.cart == 1) {
+      dispatch(IncrementAmountOne(item));
+      dispatch(calcTotal(item))
+    }
+    if (item.cart == 2) {
 
-   dispatch(IncrementAmountThree(item))
-   dispatch(calcTotalCard3(item))
- }
- if(item.cart==4)
- {
-   dispatch(IncrementAmountFour(item))
-   dispatch(calcCard4Total(item))
- }
- if(item.cart==5)
- {
-   dispatch(IncrementAmountFive(item))
-   dispatch(calcCard5Total(item))
- }
+      dispatch(IncrementAmountTwo(item))
+      dispatch(calcTotalCard2(item))
+    }
+    if (item.cart == 3) {
 
-}, [forceUpdate]);
-const decreaseAmount= React.useCallback((item) => {
-   if(item.cart==1){
-    if(item.amount>0){
-      dispatch(decreaseAmountOne(item))
-      dispatch(calcTotalDecrement(item))
-
-     }
-   }
-   if(item.cart==2){
-    if(item.amount>0){
-      dispatch(decreaseAmountTwo(item))
-      dispatch(calcTotalCard2Decrement(item))
-   
-     } 
-   }
-   if(item.cart==3){
-    if(item.amount>0){
-      dispatch(decrementAmountThree(item))
+      dispatch(IncrementAmountThree(item))
       dispatch(calcTotalCard3(item))
-    
+    }
+    if (item.cart == 4) {
+      dispatch(IncrementAmountFour(item))
+      dispatch(calcCard4Total(item))
+    }
+    if (item.cart == 5) {
+      dispatch(IncrementAmountFive(item))
+      dispatch(calcCard5Total(item))
+    }
+
+  }, [forceUpdate]);
+  const decreaseAmount = React.useCallback((item) => {
+    if (item.cart == 1) {
+      if (item.amount > 0) {
+        dispatch(decreaseAmountOne(item))
+        dispatch(calcTotalDecrement(item))
+
       }
-   }
-     if(item.cart==4)
-     {
-      if(item.amount>0){
+    }
+    if (item.cart == 2) {
+      if (item.amount > 0) {
+        dispatch(decreaseAmountTwo(item))
+        dispatch(calcTotalCard2Decrement(item))
+
+      }
+    }
+    if (item.cart == 3) {
+      if (item.amount > 0) {
+        dispatch(decrementAmountThree(item))
+        dispatch(calcTotalCard3(item))
+
+      }
+    }
+    if (item.cart == 4) {
+      if (item.amount > 0) {
         dispatch(decreaseAmountFour(item))
         dispatch(calcTotalCard4Decrement(item))
-       
-        }
-     }
-   
-       if(item.cart==5)
-     {
-      if(item.amount>0){
+
+      }
+    }
+
+    if (item.cart == 5) {
+      if (item.amount > 0) {
         dispatch(decreaseAmountFive(item))
         dispatch(calcTotalCard5Decrement(item))
-       
-        }
-     }
-        
-}, [forceUpdate]);
+
+      }
+    }
+
+  }, [forceUpdate]);
   const removeFromCart = React.useCallback(() => {
-   item.approved=false;
-   forceUpdate();
- }, [forceUpdate]);
-    return (
+    item.approved = false;
+    forceUpdate();
+  }, [forceUpdate]);
+  return (
     <Wrapper>
       <div>
         <h3>{item.title}</h3>
         <div className="info">
-        <p>Amount: {item.amount} </p>
+          <p>Amount: {item.amount} </p>
           <p>Price: {item.price} EUR</p>
-          <p>Total: {( item.price *item.amount ).toFixed(2)} EUR</p>
+          <p>Total: {(item.price * item.amount).toFixed(2)} EUR</p>
         </div>
         <div className="buttons">
-      
-          <button  onClick={() => decline(item)}>
+
+          <button onClick={() => decline(item)}>
             Decline
           </button>
-       
-   
-         
-          
-          <button  onClick={() => increaseAmount(item)}>
+
+
+
+
+          <button onClick={() => increaseAmount(item)}>
             Increase amount
           </button>
-      
-          <button  onClick={() => decreaseAmount(item)}>
+
+          <button onClick={() => decreaseAmount(item)}>
             Decrease amount
           </button>
-        
-          <button  onClick={() => approve(item)}>
+
+          <button onClick={() => approve(item)}>
             Approve
           </button>
-        
+
         </div>
-       
+
       </div>
       <img src={item.image} alt="" />
     </Wrapper>
