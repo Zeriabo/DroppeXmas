@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { Cart, CartItemDetail } from '../../List';
-import {product} from '../ProductsApi/productsApiSlice'
+
 
 export interface CardTwoState {
     value: {

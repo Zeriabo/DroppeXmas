@@ -1,7 +1,6 @@
 import React from 'react';
-import List from './List';
+import List from './pages/List';
 import Results from './pages/Results';
-import routes from './config/routes'
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 const App = () => {

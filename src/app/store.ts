@@ -5,8 +5,6 @@ import cardTwoSlice from "../features/Cards/cardTwoSlice";
 import cardThreeSlice from "../features/Cards/cardThreeSlice";
 import cardFourSlice from "../features/Cards/cardFourSlice";
 import cardFiveSlice from "../features/Cards/cardFiveSlice";
-import { productsApi } from "../features/ProductsApi/productsApiSlice";
-import {cartsApi} from '../features/CardsApi/cardsApiSlice';
 import productsSlice from "../features/Products/productsSlice";
 import cardsSlice from "../features/Cards/cardsSlice";
 
