@@ -123,7 +123,7 @@ export interface CardOneState {
   },
   calcTotal(state,action:PayloadAction<CartItemDetail>) {    
       
-
+console.log(action.payload)
     state.total +=action.payload.price;
    
    },

@@ -45,7 +45,7 @@ const Results: React.FunctionComponent = props => {
     products.forEach((product) => {
       product.forEach((element) => {
         if (element.approved)
-
+            
           totalToPay += element.price * element.amount
       })
 
@@ -62,8 +62,8 @@ const Results: React.FunctionComponent = props => {
           <tr>
             <th colSpan="2">Card date</th>
             <th colSpan="2">Child number</th>
-            <th colSpan="2"> number of Products</th>
-            <th colSpan="2">total</th>
+            <th colSpan="2"> Number of Products</th>
+            <th colSpan="2">Total items prices</th>
             <th colSpan="2">Confirmed</th>
           </tr>
           <tr>
@@ -93,6 +93,7 @@ const Results: React.FunctionComponent = props => {
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.price}</td>
+                <td>{item.amount}</td>
                 <td>{(item.approved == true) ? 'Approved' : 'Not Approved'}</td>
               </tr>
             );
@@ -136,6 +137,7 @@ const Results: React.FunctionComponent = props => {
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.price}</td>
+                <td>{item.amount}</td>
                 <td>{(item.approved == true) ? 'Approved' : 'Not Approved'}</td>
               </tr>
             );
@@ -176,6 +178,7 @@ const Results: React.FunctionComponent = props => {
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.price}</td>
+                <td>{item.amount}</td>
                 <td>{(item.approved == true) ? 'Approved' : 'Not Approved'}</td>
               </tr>
 
@@ -215,6 +218,7 @@ const Results: React.FunctionComponent = props => {
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.price}</td>
+                <td>{item.amount}</td>
                 <td>{(item.approved == true) ? 'Approved' : 'Not Approved'}</td>
               </tr>
             );
@@ -257,6 +261,7 @@ const Results: React.FunctionComponent = props => {
                 <td>{item.category}</td>
                 <td>{item.title}</td>
                 <td>{item.price}</td>
+                <td>{item.amount}</td>
                 <td>{(item.approved == true) ? 'Approved' : 'Not Approved'}</td>
               </tr>
             );
