@@ -3,4 +3,9 @@ A React app which pulls 5 carts from the API and pulls suitable amount of produc
 
 Technologies used: React, typescript, redux, CSS. 
 Feel free to see the code on the master branch.
+
 The App is deloyed on netlify [Link to App](http://droppexmass.netlify.app/)
+
+run it on local machine by :
+npm install
+npm run dev
