@@ -51,7 +51,8 @@ approvedCarts.forEach((cart:Cart)=>{
 products.forEach((product)=>{
   product.forEach((element)=>{
     if(element.approved)
-    totalToPay+=element.price
+   
+    totalToPay+=element.price*element.amount
   })
 
 
