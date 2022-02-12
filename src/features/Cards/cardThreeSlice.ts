@@ -41,17 +41,16 @@ const cardThreeSlice = createSlice({
       state.date = action.payload.date;
       state.id = action.payload.id;
       state.products = action.payload.products;
-      state.total = action.payload.total;
       state.userId = action.payload.userId;
 
     },
-    DeclineThree(state, action: PayloadAction<{}>) {
+    DeclineThree(state, action: PayloadAction<CartItemDetail>) {
       var id = action.payload.id;
       var targetIndex = state.products.findIndex((obj => obj.id == id));
 
       state.products[targetIndex].approved = false;
     },
-    ApproveThree(state, action: PayloadAction<{}>) {
+    ApproveThree(state, action: PayloadAction<CartItemDetail>) {
       var id = action.payload.id;
       var targetIndex = state.products.findIndex((obj => obj.id == id));
 
@@ -62,7 +61,7 @@ const cardThreeSlice = createSlice({
 
       state.products.push(action.payload)
     },
-    decreaseAmountThree(state, action: PayloadAction<{}>) {
+    decreaseAmountThree(state, action: PayloadAction<CartItemDetail>) {
 
       var id = action.payload.id;
 
@@ -75,7 +74,7 @@ const cardThreeSlice = createSlice({
 
 
     },
-    IncrementAmountThree(state, action: PayloadAction<{}>) {
+    IncrementAmountThree(state, action: PayloadAction<CartItemDetail>) {
 
       var id = action.payload.id;
 
@@ -87,7 +86,7 @@ const cardThreeSlice = createSlice({
 
 
     },
-    decrementAmountThree(state, action: PayloadAction<{}>) {
+    decrementAmountThree(state, action: PayloadAction<CartItemDetail>) {
 
       var id = action.payload.id;
 
@@ -100,18 +99,21 @@ const cardThreeSlice = createSlice({
 
     },
     setTotal3(state, action: PayloadAction<number>) {
-
-      state.total = action.payload;
+if(action.type=="cardThree/setTotal3")
+{console.log(action)
+  state.total = action.payload;
+}
+   
 
     },
-    calcTotalCard3(state, action: PayloadAction<{}>) {
+    calcTotalCard3(state, action: PayloadAction<CartItemDetail>) {
 
 
       state.total += action.payload.price;
 
     },
 
-    calcTotalCard3Decrement(state, action: PayloadAction<{}>) {
+    calcTotalCard3Decrement(state, action: PayloadAction<CartItemDetail>) {
 
       state.total -= action.payload.price;
 

@@ -14,8 +14,9 @@ let cardsSlice = createSlice({
 
 
     },
-
-    addcard: (state, action: PayloadAction<{}>) => {
+    
+    
+    addcard: (state, action: PayloadAction<CartItemDetail>) => {
       var b: boolean = false;
 
       state.forEach((e) => {
@@ -38,5 +39,5 @@ let cardsSlice = createSlice({
   },
 })
 
-export const { addcard, getCard } = cardsSlice.actions
+export const { addcard } = cardsSlice.actions
 export default cardsSlice.reducer

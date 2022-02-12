@@ -39,7 +39,6 @@ const cardFourSlice = createSlice({
       state.date = action.payload.date;
       state.id = action.payload.id;
       state.products = action.payload.products;
-      state.total = action.payload.total;
       state.userId = action.payload.userId;
 
     },
@@ -50,7 +49,7 @@ const cardFourSlice = createSlice({
     removeProductFromCardFour(state) {
       state.products.pop()
     },
-    IncrementAmountFour(state, action: PayloadAction<number>) {
+    IncrementAmountFour(state, action: PayloadAction<CartItemDetail>) {
       state.products.forEach((element, index) => {
         {
           if (element.id == action.payload.id) {
@@ -59,7 +58,7 @@ const cardFourSlice = createSlice({
         }
       })
     },
-    decreaseAmountFour(state, action: PayloadAction<{}>) {
+    decreaseAmountFour(state, action: PayloadAction<CartItemDetail>) {
 
       var id = action.payload.id;
 
@@ -72,31 +71,34 @@ const cardFourSlice = createSlice({
 
 
     },
-    ApproveCard4(state, action: PayloadAction<{}>) {
+    ApproveCard4(state, action: PayloadAction<CartItemDetail>) {
       var id = action.payload.id;
       var targetIndex = state.products.findIndex((obj => obj.id == id));
 
       state.products[targetIndex].approved = true;
 
     },
-    Declinecard4(state, action: PayloadAction<{}>) {
+    Declinecard4(state, action: PayloadAction<CartItemDetail>) {
       var id = action.payload.id;
       var targetIndex = state.products.findIndex((obj => obj.id == id));
 
       state.products[targetIndex].approved = false;
     },
-    calcCard4Total(state, action: PayloadAction<{}>) {
+    calcCard4Total(state, action: PayloadAction<CartItemDetail>) {
       state.total += action.payload.price;
 
     },
-    calcTotalCard4Decrement(state, action: PayloadAction<{}>) {
+    calcTotalCard4Decrement(state, action: PayloadAction<CartItemDetail>) {
 
       state.total -= action.payload.price;
 
     },
     setTotal4(state, action: PayloadAction<number>) {
-
-      state.total = action.payload;
+   if(action.type=="cardFour/setTotal4")
+   {
+    state.total = action.payload;
+   }
+     
 
     },
 

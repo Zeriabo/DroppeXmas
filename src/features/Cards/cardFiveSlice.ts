@@ -39,7 +39,6 @@ const cardFiveSlice = createSlice({
       state.date = action.payload.date;
       state.id = action.payload.id;
       state.products = action.payload.products;
-      state.total = action.payload.total;
       state.userId = action.payload.userId;
 
     },
@@ -50,7 +49,7 @@ const cardFiveSlice = createSlice({
     removeProductFromCardFive(state) {
       state.products.pop()
     },
-    IncrementAmountFive(state, action: PayloadAction<number>) {
+    IncrementAmountFive(state, action: PayloadAction<CartItemDetail>) {
 
       state.products.forEach((val) => {
         if (val.id == action.payload.id) {
@@ -58,7 +57,7 @@ const cardFiveSlice = createSlice({
         }
       })
     },
-    decreaseAmountFive(state, action: PayloadAction<{}>) {
+    decreaseAmountFive(state, action: PayloadAction<CartItemDetail>) {
 
       var id = action.payload.id;
 
@@ -71,28 +70,32 @@ const cardFiveSlice = createSlice({
 
 
     },
-    calcCard5Total(state, action: PayloadAction<{}>) {
+    calcCard5Total(state, action: PayloadAction<CartItemDetail>) {
+
       state.total += action.payload.price;
 
     },
     setTotal5(state, action: PayloadAction<number>) {
-
-      state.total = action.payload;
+if(action.type=="cardFive/setTotal5")
+{
+  state.total = action.payload;
+}
+      
 
     },
-    calcTotalCard5Decrement(state, action: PayloadAction<{}>) {
+    calcTotalCard5Decrement(state, action: PayloadAction<CartItemDetail>) {
 
       state.total -= action.payload.price;
 
     },
-    ApproveCard5(state, action: PayloadAction<{}>) {
+    ApproveCard5(state, action: PayloadAction<CartItemDetail>) {
       var id = action.payload.id;
       var targetIndex = state.products.findIndex((obj => obj.id == id));
 
       state.products[targetIndex].approved = true;
 
     },
-    Declinecard5(state, action: PayloadAction<{}>) {
+    Declinecard5(state, action: PayloadAction<CartItemDetail>) {
       var id = action.payload.id;
       var targetIndex = state.products.findIndex((obj => obj.id == id));
 

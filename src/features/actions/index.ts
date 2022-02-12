@@ -17,11 +17,7 @@ const fetchProductsSuccess = (products: any) => ({
     payload: { products }
 })
 function calculateTotal(newcart: Cart) {
-
-    newcart.products.forEach((prod) => {
-
-    })
-
+   
     return newcart.products.reduce((a, b) => a + b.price, 0);
 }
 function applyDiscounts(card1: Cart, card2: Cart, card3: Cart, card4: Cart, card5: Cart) {
@@ -42,14 +38,14 @@ function applyDiscounts(card1: Cart, card2: Cart, card3: Cart, card4: Cart, card
         })
 
         if (count > 1) {
-            var o = (count * 10)
+            var smallPercent = (count * 10)
         }
-        if (o >= 20) {
+        if (smallPercent >= 20) {
 
             products.forEach((product) => {
                 if (product.id == element.id) {
                     var sum = product.price + element.price;
-                    var percentage = 100 - o
+                    var percentage = 100 - smallPercent
                     sum = (sum * percentage / 100) / 2;
                     if (product.price != sum) {
                         product.price = sum
@@ -175,9 +171,7 @@ function fillProducts(cart: Cart, products: CartItemDetail[]) {
         });
 
 
-    total = calculateTotal(newCart)
-
-    newCart.total = total;
+ 
     return newCart;
 
 }
@@ -197,7 +191,7 @@ export const fetchCards = () => {
 
             applyDiscounts(card1, card2, card3, card4, card5);
             checkAndModifyGifts(card1, card2, card3, card4, card5, products.data);
-
+        
             dispatch(card1Success(card1))
             dispatch(card2Success(card2))
             dispatch(card3Success(card3))

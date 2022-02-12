@@ -1,5 +1,5 @@
 import React from "react";
-import { CartItemDetail } from "../../App";
+import { CartItemDetail } from "../../pages/List";
 import { Wrapper } from "../atoms/cartItem";
 import { ButtonWrapper } from "../atoms/button";
 import useForceUpdate from 'use-force-update';
@@ -37,7 +37,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
       dispatch(calcTotalCard2(item))
     }
     if (item.cart == 3) {
-      dispatch(calcTotalCard3({ item }))
+      dispatch(calcTotalCard3(item))
     }
     if (item.cart == 4) {
       dispatch(calcCard4Total(item))
@@ -88,26 +88,26 @@ const CartItem: React.FC<Props> = ({ item }) => {
   }, [forceUpdate]);
 
   const increaseAmount = React.useCallback((item) => {
-
+    
     if (item.cart == 1) {
       dispatch(IncrementAmountOne(item));
       dispatch(calcTotal(item))
     }
-    if (item.cart == 2) {
-
+    if (item.cart === 2) {
+     
       dispatch(IncrementAmountTwo(item))
       dispatch(calcTotalCard2(item))
     }
-    if (item.cart == 3) {
+    if (item.cart === 3) {
 
       dispatch(IncrementAmountThree(item))
       dispatch(calcTotalCard3(item))
     }
-    if (item.cart == 4) {
+    if (item.cart === 4) {
       dispatch(IncrementAmountFour(item))
       dispatch(calcCard4Total(item))
     }
-    if (item.cart == 5) {
+    if (item.cart === 5) {
       dispatch(IncrementAmountFive(item))
       dispatch(calcCard5Total(item))
     }
