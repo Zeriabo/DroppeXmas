@@ -7,5 +7,5 @@ Feel free to see the code on the master branch.
 The App is deloyed on netlify [Link to App](http://droppexmass.netlify.app/)
 
 run it on local machine by :
-npm install
+npm install &
 npm run dev
